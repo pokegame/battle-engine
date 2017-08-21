@@ -86,3 +86,34 @@ export interface Actor {
   name: string;
   partyMembers: Pokemon[];
 }
+
+/**
+ * Represents the Pokémon state in the battle.
+ */
+export interface BattlingPokemon extends Pokemon {
+  dex: PokedexEntry;
+  stats: {
+    // Partly determines how much damage a Pokémon deals when using a physical move.
+    attack: number;
+    // Partly determines how much damage a Pokémon receives when it is hit with a physical move.
+    defense: number;
+    // Partly determines how much damage a Pokémon deals when using a special move.
+    specialAttack: number;
+    // Partly determines how much damage a Pokémon receives when it is hit with a special move.
+    specialDefense: number;
+    // Determines the order of Pokémon that can act in battle.
+    speed: number;
+  };
+  inBattleStats: {
+    // Determines its probability of avoiding other Pokémon's moves.
+    // The initial value at the start of any battle is 100%.
+    evasion: number;
+    // Determines its probability of hitting another Pokémon.
+    // The initial value at the start of any battle is 100%.
+    accuracy: number;
+  };
+  // Determine how much damage a Pokémon can receive before fainting.
+  maxHitPoint: number;
+  // Current amount of hp.
+  hitPoint: number;
+}
