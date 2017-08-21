@@ -17,6 +17,7 @@
       "property-declaration",
       "member-variable-declaration"
     ],
+    "interface-name": [true, "never-prefix"],
     "ter-indent": [true, 2],
     "no-constant-condition": true
   }
