@@ -117,3 +117,14 @@ export interface BattlingPokemon extends Pokemon {
   // Current amount of hp.
   hitPoint: number;
 }
+
+/**
+ * Represents the move state in the battle.
+ */
+export interface Move {
+  dex: MovedexEntry;
+  // Current amount of pp.
+  powerPoint: number;
+  // Determines if the pokémon can use the move.
+  isDisabled: boolean;
+}
