@@ -33,13 +33,30 @@ export type Stats = {
   spe: number;
 };
 
+export interface Pokemon {
+  // Pokemon's identifier. Usually an UUID.
+  name: string;
+  // Types of Pokémon species.
+  species: string;
+  // Is a measurement of how strong a Pokémon currently is.
+  level: number;
+  // The Pokémon sex.
+  gender: 'male' | 'female' | 'unknown';
+  // Attributes which give bonuses to an individual Pokémon's stats.
+  evs: Stats;
+  // Are the Pokémon equivalent of genes.
+  ivs: Stats;
+  // List of move's name that the Pokémon is able to use.
+  moves: string[]
+}
+
 /**
  * Immutable values of a given species.
  */
 export interface PokedexEntry {
   // A Pokémon may have either one or two types.
   types: Type[];
-  // Base stats define the average strengths of a pokémon.
+  // Base stats define the average strengths of a Pokémon.
   baseStats: Stats;
 }
 
@@ -59,4 +76,13 @@ export interface MovedexEntry {
   type: Type;
   // Determines the kind of damage it deals.
   category: 'physical' | 'special' | 'status';
+}
+
+/**
+ * The trainer with its team of Pokémon.
+ */
+export interface Actor {
+  // Actor's identifier. Usually an UUID.
+  name: string;
+  partyMembers: Pokemon[];
 }
