@@ -1,0 +1,36 @@
+{
+  "name": "battle-engine",
+  "version": "0.0.0",
+  "description": "Pokémon battle engine",
+  "main": "build/src/index.js",
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 6.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "~20.0.2",
+    "@types/node": "^6.0.85",
+    "jest": "~20.0.0",
+    "rimraf": "~2.6.1",
+    "tslint": "~5.4.3",
+    "tslint-eslint-rules": "^4.1.1",
+    "tslint-microsoft-contrib": "~5.0.1",
+    "tsutils": "~2.5.1",
+    "typescript": "~2.4.1"
+  },
+  "scripts": {
+    "clean": "rimraf coverage build tmp",
+    "build": "tsc -p tsconfig.release.json",
+    "watch": "tsc -w -p tsconfig.release.json",
+    "lint": "tslint -t stylish --type-check --project 'tsconfig.json'",
+    "pretest": "npm run lint",
+    "test": "npm run test-only",
+    "test-only": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "author": "Federkun <federkun@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tslib": "~1.7.1"
+  }
+}
