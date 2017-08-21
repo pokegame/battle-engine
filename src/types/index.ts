@@ -1,5 +1,5 @@
 /**
- * Types are properties for Pokémon and their moves. 
+ * Types are properties for Pokémon and their moves.
  * A Pokémon may have either one or two types.
  * A move has exactly one type.
  */
@@ -33,4 +33,13 @@ export type Stats = {
   spa: number;
   spd: number;
   spe: number;
+};
+
+/**
+ * Immutable values of a given species.
+ */
+export interface PokedexEntry {
+  types: Type[];
+  // Base stats define the average strengths of a pokémon.
+  baseStats: Stats;
 }
