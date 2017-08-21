@@ -51,6 +51,15 @@ export interface Pokemon {
 }
 
 /**
+ * The trainer with its team of Pokémon.
+ */
+export interface Actor {
+  // Actor's identifier. Usually an UUID.
+  name: string;
+  partyMembers: Pokemon[];
+}
+
+/**
  * Immutable values of a given species.
  */
 export interface PokedexEntry {
@@ -76,15 +85,6 @@ export interface MovedexEntry {
   type: Type;
   // Determines the kind of damage it deals.
   category: 'physical' | 'special' | 'status';
-}
-
-/**
- * The trainer with its team of Pokémon.
- */
-export interface Actor {
-  // Actor's identifier. Usually an UUID.
-  name: string;
-  partyMembers: Pokemon[];
 }
 
 /**
