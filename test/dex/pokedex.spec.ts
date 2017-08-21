@@ -1,4 +1,4 @@
-import { getPokedexEntry } from '../src/pokedex';
+import { getPokedexEntry } from '../../src/dex/pokedex';
 
 describe('Pokédex', () => {
   it('should return entry for valid species', () => {
