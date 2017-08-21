@@ -22,3 +22,15 @@ export type Type = 'normal'
   | 'steel'
   | 'fairy'
 ;
+
+/**
+ *  Stats refer to the numerical values of each field in regards to individual Pokémon.
+ */
+export type Stats = {
+  hp: number;
+  atk: number;
+  def: number;
+  spa: number;
+  spd: number;
+  spe: number;
+}
