@@ -47,7 +47,7 @@ export interface Pokemon {
   // Are the Pokémon equivalent of genes.
   ivs: Stats;
   // List of move's name that the Pokémon is able to use.
-  moves: string[]
+  moves: string[];
 }
 
 /**
@@ -112,7 +112,7 @@ export interface BattlingPokemon extends Pokemon {
     // The initial value at the start of any battle is 100%.
     accuracy: number;
   };
-  // Determine how much damage a Pokémon can receive before fainting.
+  // Determines how much damage a Pokémon can receive before fainting.
   maxHitPoint: number;
   // Current amount of hp.
   hitPoint: number;
@@ -127,4 +127,32 @@ export interface Move {
   powerPoint: number;
   // Determines if the pokémon can use the move.
   isDisabled: boolean;
+}
+
+/**
+ * Battle state.
+ */
+export interface BattleState {
+  // Actor's identifiers.
+  actors: string[];
+  // Map of every battling Pokémon.
+  pokemon: {
+    [name: string]: BattlingPokemon;
+  };
+  // Party members identifiers for each actor.
+  parties: {
+    [actor: string]: string[];
+  };
+  // Current Pokémon identifiers in battle for each actor.
+  battlers: {
+    [actor: string]: string;
+  };
+  // Every moves of every battling Pokèmon.
+  moves: {
+    [pokemon: string]: {
+      [move: string]: Move;
+    };
+  };
+  // Determines if the battle is ended or not.
+  isRunning: boolean;
 }
