@@ -160,3 +160,57 @@ export interface BattleState {
     };
   };
 }
+
+/**
+ * The available decisions that each actor can do within a turn.
+ * If the actor isn't present, he can't make any decisions.
+ */
+export interface BattleChoices {
+  [actor: string]: ('attack' | 'switch')[];
+}
+
+/**
+ * Actor choose to attack with the specified move.
+ */
+export interface AttackDecision {
+  decision: 'attack';
+  actor: string;
+  move: string;
+}
+
+/**
+ * Actor choose to switch the current battling Pokémon with the specified Pokémon.
+ */
+export interface SwitchDecision {
+  decision: 'switch';
+  actor: string;
+  pokemon: string;
+}
+
+/**
+ * All the available decisions that an actor can make within a turn.
+ */
+export type BattleDecision = AttackDecision | SwitchDecision;
+
+/**
+ * The decision provided from the turn's client.
+ * If decision isn't valid, it must be rejected and `emitError` must be invoked with the error message.
+ */
+export interface DecisionResponse {
+  battleDecision: BattleDecision;
+  emitError: ((errorMessage: string) => void) | undefined;
+}
+
+/**
+ * Battle commands checks if the given command can be applied for the current state before returning a new one.
+ */
+export type BattleCommand = (battleState: BattleState) => BattleState;
+
+/**
+ * A command that must be executed in the turn after all the actors made their decisions.
+ * They must be executed in order of priority.
+ */
+export interface TurnCommand {
+  command: BattleCommand;
+  priorities: number[];
+}

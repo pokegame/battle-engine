@@ -1,0 +1,1 @@
+export { isFainted } from './isFainted';
