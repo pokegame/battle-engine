@@ -71,7 +71,6 @@ export function createState(...actors: types.Actor[]): types.BattleState {
         ...moves,
         [moveName]: createMove(moveName)
       }), {})
-    }), {}),
-    isRunning: true
+    }), {})
   };
 }

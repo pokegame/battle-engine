@@ -129,6 +129,12 @@ export interface Move {
   isDisabled: boolean;
 }
 
+export interface GameState {
+  battle: BattleState;
+  // Determines if the battle is ended or not.
+  isRunning: boolean;
+}
+
 /**
  * Battle state.
  */
@@ -153,6 +159,4 @@ export interface BattleState {
       [move: string]: Move;
     };
   };
-  // Determines if the battle is ended or not.
-  isRunning: boolean;
 }
