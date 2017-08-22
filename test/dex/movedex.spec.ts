@@ -1,4 +1,4 @@
-import { getMovedexEntry } from '../src/movedex';
+import { getMovedexEntry } from '../../src/dex/movedex';
 
 describe('Movedex', () => {
   it('should return entry for valid move', () => {
