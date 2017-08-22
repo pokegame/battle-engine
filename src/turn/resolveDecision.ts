@@ -1,4 +1,5 @@
-import { isFainted } from '../projections';
+import { attackCommand, switchCommand } from '../commands';
+import { decisionSpeed, isFainted } from '../projections';
 import * as types from '../types';
 import { DecisionError } from './decisionError';
 
@@ -8,8 +9,30 @@ import { DecisionError } from './decisionError';
  */
 export function resolveDecision(battleState: types.BattleState, battleDecision: types.BattleDecision): types.TurnCommand {
   if (battleDecision.decision === 'attack') {
-    // @TODO
-    throw new Error('Must implement it.');
+    // The battler Pokémon's name of this actor.
+    const attackerName = battleState.battlers[battleDecision.actor];
+
+    if (!(battleDecision.move in battleState.moves[attackerName])) {
+      throw new DecisionError('This pokémon does not have this move.');
+    }
+
+    const move = battleState.moves[attackerName][battleDecision.move];
+
+    if (move.isDisabled) {
+      throw new DecisionError('Cannot use this move: is disabled.');
+    }
+
+    if (move.powerPoint <= 0) {
+      throw new DecisionError('Cannot use this move: is out of power point.');
+    }
+
+    return {
+      command: attackCommand(battleDecision.actor, attackerName, battleDecision.move),
+      // The attacks with the highest priority go first.
+      // If two Pokémon both use an attack with the same priority,
+      // then the speed stat of each Pokémon comes into play.
+      priorities: [8, move.dex.priority, decisionSpeed(battleState.pokemon[attackerName])]
+    };
   }
 
   if (battleDecision.decision === 'switch') {
@@ -25,8 +48,10 @@ export function resolveDecision(battleState: types.BattleState, battleDecision: 
       throw new DecisionError('Cannot switch to a fainted pokémon.');
     }
 
-    // @TODO
-    throw new Error('Must implement it.');
+    return {
+      command: switchCommand(battleDecision.actor, battleDecision.pokemon),
+      priorities: [64]
+    };
   }
 
   throw new DecisionError('Invalid decision.');
