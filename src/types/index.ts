@@ -1,3 +1,8 @@
+export interface BattleOptions {
+  // How much time the actor have to make his decision?
+  decisionTimeout?: number;
+}
+
 /**
  * Types are properties for Pokémon and their moves.
  */
@@ -127,12 +132,6 @@ export interface Move {
   powerPoint: number;
   // Determines if the pokémon can use the move.
   isDisabled: boolean;
-}
-
-export interface GameState {
-  battle: BattleState;
-  // Determines if the battle is ended or not.
-  isRunning: boolean;
 }
 
 /**
