@@ -135,6 +135,14 @@ export interface Move {
 }
 
 /**
+ * Represents of every actions that happened in the battle.
+ */
+export interface BattleEvent {
+  type: string;
+  payload: {};
+}
+
+/**
  * Battle state.
  */
 export interface BattleState {
@@ -158,6 +166,8 @@ export interface BattleState {
       [move: string]: Move;
     };
   };
+  // An append-only log of what happened in the battle.
+  events: BattleEvent[];
 }
 
 /**
