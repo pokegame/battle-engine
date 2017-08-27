@@ -16,6 +16,11 @@ export function attackCommand(actor: string, attackerName: string, moveName: str
     // The target's name.
     const defenderName = battleState.battlers[enemyActor];
 
+    // Only battling Pokémon can attack.
+    if (battleState.battlers[actor] !== attackerName) {
+      return battleState;
+    }
+
     const attacker = battleState.pokemon[attackerName];
     const defender = battleState.pokemon[defenderName];
     const move = battleState.moves[attackerName][moveName];
