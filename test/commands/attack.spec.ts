@@ -2,7 +2,6 @@ import { attackCommand } from '../../src/commands';
 import { hitPointChanged, moveHit, moveMissed } from '../../src/events';
 import { createState } from '../../src/state';
 import * as types from '../../src/types';
-import * as utils from '../../src/utils';
 
 describe('attackCommand', () => {
   const actor = 'trainer';
@@ -68,7 +67,7 @@ describe('attackCommand', () => {
   });
 
   it('should not decrease hit point when move does not hit', () => {
-    spyOn(utils, 'chance').and.returnValue(false);
+    state.moves[attacker][move].dex.accuracy = 0;
     const command = attackCommand(actor, attacker, move);
     expect(command(state).pokemon[defender].hitPoint).toBe(state.pokemon[defender].hitPoint);
   });
@@ -77,7 +76,7 @@ describe('attackCommand', () => {
     const command = attackCommand(actor, attacker, move);
     const originalPowerPoint = state.moves[attacker][move].powerPoint;
     const powerPointWhenMoveHit = command(state).moves[attacker][move].powerPoint;
-    spyOn(utils, 'chance').and.returnValue(false);
+    state.moves[attacker][move].dex.accuracy = 0;
     const powerPointWhenMoveMiss = command(state).moves[attacker][move].powerPoint;
     expect(originalPowerPoint - powerPointWhenMoveHit).toBe(1);
     expect(originalPowerPoint - powerPointWhenMoveMiss).toBe(1);
@@ -93,7 +92,7 @@ describe('attackCommand', () => {
   });
 
   it('should add event when move does not hit', () => {
-    spyOn(utils, 'chance').and.returnValue(false);
+    state.moves[attacker][move].dex.accuracy = 0;
     const command = attackCommand(actor, attacker, move);
     expect(command(state).events).toEqual([
       moveMissed(move, attacker, defender)

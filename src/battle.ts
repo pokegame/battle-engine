@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import { createController } from './controller';
 import { isBattleEnded } from './projections';
 import { turn } from './turn';
 import * as types from './types';
@@ -12,12 +12,12 @@ function battleFactory(options: types.BattleOptions = {}) {
 
   async function run(
     battleState: types.BattleState,
-    onTurn: (battleState: types.BattleState, controller: EventEmitter) => void
+    onTurn: (battleState: types.BattleState, listener: types.Listener) => void
   ): Promise<void> {
     // Each turn has its own controller.
-    const controller = new EventEmitter();
+    const controller = createController();
     // Notify the client with this turn's state and the new controller.
-    onTurn(battleState, controller);
+    onTurn(battleState, controller.listen);
 
     // The battle is over!
     if (isBattleEnded(battleState)) {
@@ -27,9 +27,11 @@ function battleFactory(options: types.BattleOptions = {}) {
     // Notify the client with this turn's available choices.
     // Once the client provide its decision, the nextTick's Promise is resolved with it.
     const decisionProvider = (choices: types.BattleChoices, resolve: (response: types.DecisionResponse) => void): void => {
-      controller.emit('decision', choices, (battleDecision: types.BattleDecision, emitError?: (errorMessage: string) => void) => {
+      const dispatcher: types.Dispatcher = (battleDecision: types.BattleDecision, emitError?: (errorMessage: string) => void) => {
         resolve({ battleDecision, emitError });
-      });
+      };
+
+      controller.emit(choices, dispatcher);
     };
 
     battleState = await nextTick(turn(battleState), decisionProvider);
@@ -68,7 +70,7 @@ export function createBattle(initState: types.BattleState, options: types.Battle
   const battle = battleFactory(options);
 
   const observable = (observer: {
-    next(battleState: types.BattleState, controller: EventEmitter): void,
+    next(battleState: types.BattleState, listener: types.Listener): void,
     error(err: Error): void,
     complete(): void
   }) => {
@@ -79,7 +81,7 @@ export function createBattle(initState: types.BattleState, options: types.Battle
 
   return {
     start: (
-      next: (battleState: types.BattleState, controller: EventEmitter) => void,
+      next: (battleState: types.BattleState, listener: types.Listener) => void,
       error: (err: Error) => void,
       complete: () => void
     ) => {
