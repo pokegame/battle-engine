@@ -87,7 +87,7 @@ describe('attackCommand', () => {
     const nextState = command(state);
     expect(nextState.events).toEqual([
       moveHit(move, attacker, defender),
-      hitPointChanged(defender, state.pokemon[defender].hitPoint - nextState.pokemon[defender].hitPoint)
+      hitPointChanged(defender, nextState.pokemon[defender].hitPoint - state.pokemon[defender].hitPoint)
     ]);
   });
 
