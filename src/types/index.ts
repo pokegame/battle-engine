@@ -3,6 +3,21 @@ export interface BattleOptions {
   decisionTimeout?: number;
 }
 
+export type Dispatcher = (battleDecision: BattleDecision, emitError?: (errorMessage: string) => void) => void;
+
+export type DecisionProvider = (choices: BattleChoices, dispatch: Dispatcher) => void;
+
+export type Listener = (sub: DecisionProvider) => () => void;
+
+/**
+ * Allows two-way communication.
+ * The client listen for choices, then he dispatch a decision based on them.
+ */
+export interface BattleController {
+  listen: Listener;
+  emit(choices: BattleChoices, dispatch: Dispatcher): void;
+}
+
 /**
  * Types are properties for Pokémon and their moves.
  */
