@@ -1,5 +1,5 @@
 {
-  "name": "battle-engine",
+  "name": "pokemon-battle-engine",
   "version": "0.0.0",
   "description": "Pokémon battle engine",
   "main": "build/src/index.js",
