@@ -132,6 +132,6 @@ describe('battle', () => {
       done();
     }, noop);
 
-    setImmediate(() => jest.runOnlyPendingTimers());
+    jest.runOnlyPendingTimers();
   });
 });
