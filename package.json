@@ -27,7 +27,7 @@
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepare": "npm run build"
+    "prepublish": "npm run build"
   },
   "author": "Federkun <federkun@gmail.com>",
   "license": "MIT",
