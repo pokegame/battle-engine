@@ -4,7 +4,8 @@
     "declaration": false,
     "rootDir": ".",
     "outDir": "./build",
-    "removeComments": true
+    "removeComments": true,
+    "sourceMap": false
   },
   "include": [
     "src/**/*"
