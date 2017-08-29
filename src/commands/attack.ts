@@ -72,8 +72,8 @@ export function attackCommand(actor: string, attackerName: string, moveName: str
       ) / 50
     ) + 2;
 
-    const delta = baseDamage > defender.hitPoint ? defender.hitPoint : baseDamage;
-    const currentHp = defender.hitPoint - delta;
+    const delta = - (baseDamage > defender.hitPoint ? defender.hitPoint : baseDamage);
+    const currentHp = defender.hitPoint + delta;
 
     const events = [
       moveHit(moveName, attackerName, defenderName),
