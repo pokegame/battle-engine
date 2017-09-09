@@ -1,5 +1,5 @@
 {
-  "name": "pokemon-battle-engine",
+  "name": "@pokegame/battle-engine",
   "version": "0.0.0",
   "description": "Pokémon battle engine",
   "main": "build/src/index.js",
@@ -9,8 +9,8 @@
     "node": ">= 6.9.0"
   },
   "devDependencies": {
-    "@types/jest": "~20.0.2",
-    "@types/node": "^6.0.85",
+    "@types/jest": "^20.0.8",
+    "@types/node": "^6.0.88",
     "jest": "~20.0.0",
     "rimraf": "~2.6.1",
     "tslint": "~5.4.3",
