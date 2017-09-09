@@ -1,0 +1,8 @@
+coverage/
+src/
+test/
+jest.config.js
+preprocessor.js
+tsconfig.json
+tsconfig.release.json
+tslint.json

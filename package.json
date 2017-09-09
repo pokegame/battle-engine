@@ -1,15 +1,16 @@
 {
-  "name": "pokemon-battle-engine",
-  "version": "0.0.0",
+  "name": "@pokegame/battle-engine",
+  "version": "0.0.1",
   "description": "Pokémon battle engine",
   "main": "build/src/index.js",
+  "typings": "build/src/index.d.ts",
   "engineStrict": true,
   "engines": {
     "node": ">= 6.9.0"
   },
   "devDependencies": {
-    "@types/jest": "~20.0.2",
-    "@types/node": "^6.0.85",
+    "@types/jest": "^20.0.8",
+    "@types/node": "^6.0.88",
     "jest": "~20.0.0",
     "rimraf": "~2.6.1",
     "tslint": "~5.4.3",
@@ -27,7 +28,7 @@
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run test-only && npm run build"
   },
   "author": "Federkun <federkun@gmail.com>",
   "license": "MIT",
