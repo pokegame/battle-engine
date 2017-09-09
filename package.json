@@ -1,6 +1,6 @@
 {
   "name": "@pokegame/battle-engine",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Pokémon battle engine",
   "main": "build/src/index.js",
   "typings": "build/src/index.d.ts",
